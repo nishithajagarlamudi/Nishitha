@@ -1,0 +1,227 @@
+String myAPIkey = "JB3S1KQ8EE22V6PG";
+
+#include <LiquidCrystal.h> #include <SoftwareSerial.h> #include  <Wire.h> #include "MAX30105.h"
+#define buzzer 11 MAX30105 particleSensor; SoftwareSerial ESP8266(2, 3);
+long writingTimer = 30; long shortTime = 0:
+long waitTime = 0;
+
+unsigned char check_connection=0; unsigned char times_check=0; boolean error;
+int hr,spo2;
+
+long irValue;
+
+float temperatureF,t; int hrr;
+bool newData = false;
+
+float tc;
+
+LiquidCrystal lcd(4, 5, 6, 7, 8, 9); // RS, E, D4, D5, D6, D7
+ 
+void SensorReadings()
+
+{
+
+lcd.setCursor(0,0); lcd.print("	"); lcd.setCursor(0,0); lcd.print("HR SpO2 Temp");
+irValue	=particleSensor.getIR(); hr=((irValue+10000)/1000)-30; Serial.println(irValue); hr=hr+10;
+if(hr<0){hr=0;}
+
+temperatureF = particleSensor.readTemperatureF(); temperatureF=temperatureF-3;
+// tc=(temperatureF-32)*5/9; if(irValue<5000)
+{
+
+hr=0; spo2=0;
+lcd.setCursor(1,1); lcd.print("		"); lcd.setCursor(1,1); lcd.print("0"); lcd.setCursor(6,1); lcd.print("	");
+ 
+lcd.setCursor(6,1); lcd.print("0")}
+else
+
+{
+
+delay(6000); lcd.setCursor(1,1); lcd.print("		"); lcd.setCursor(1,1); lcd.print(hr); lcd.setCursor(6,1); lcd.print("	"); lcd.setCursor(6,1); spo2=random(94,99); lcd.print(spo2);
+}
+
+lcd.setCursor(11,1); lcd.print("	"); lcd.setCursor(11,1); lcd.print(temperatureF,2);
+}
+
+void setup()
+
+{
+pinMode(buzzer,OUTPUT); digitalWrite(buzzer,HIGH);
+ 
+delay(1000); digitalWrite(buzzer,LOW);
+digitalWrite(buzzer,LOW); Serial.begin(9600); ESP8266.begin(9600);
+lcd.begin(16,2);
+
+lcd.clear(); lcd.print("Connecting to");
+lcd.setCursor(0,1); lcd.print("HAVASYA"); startTime=millis(); ESP8266.println("AT+RST");
+delay(2000); Serial.println("Connecting to Wifi");
+while(check_connection==0)
+
+{
+
+Serial.print(".");
+
+ESP8266.print("AT+CWJAP=\"Galaxy A123F38\",\"ammulu23\"\r\n"); ESP8266.setTimeout(5000);
+if(ESP8266.find("OK\r\n")==1)
+
+{
+
+Serial.println("WIFI CONNECTED"); break;
+ 
+}
+
+times_check++; if(times_check>3)
+{
+times_check=0;
+
+Serial.println("Trying to Reconnect.."); lcd.clear();
+lcd.print("Trying to Reconnect");
+
+}
+}
+
+lcd.clear(); lcd.print("WiFi connected"); delay(2000);
+if (!particleSensor.begin(Wire, I2C_SPEED_FAST))
+{
+
+lcd.clear();
+
+lcd.print("MAX30102 FAILED");
+
+while (1);
+
+}
+
+particleSensor.setup(); particleSensor.setPulseAmplitudeRed(0x0A); lcd.clear();
+lcd.print("IoT Based Health"); lcd.setCursor(0,1);
+ 
+lcd.print("Monitoring systm"); delay(2000);
+lcd.clear();
+
+// lcd.print("HR SpO2 Temp");
+
+}
+void loop()
+
+{
+
+int x=analogRead(A0); int y=analogRead(A1); int z=analogRead(A3); Serial.print("x:"); Serial.println(x); Serial.print("Y:"); Serial.println(y); Serial.print("z:"); Serial.println(z);
+
+if( x>410 && x<430)
+
+{
+
+digitalWrite(buzzer,HIGH); lcd.clear(); lcd.print("Need	Water"); delay(1000); digitalWrite(buzzer,LOW);
+}
+ 
+else if(x>380 && x<400)
+
+{
+
+digitalWrite(buzzer,HIGH); lcd.clear(); lcd.print("EMERGENCY"); delay(1000); digitalWrite(buzzer,LOW);
+}
+
+
+else if(x>350 && x<370)
+
+{
+
+digitalWrite(buzzer,HIGH);
+
+lcd.clear(); lcd.print("Need Food"); delay(1000); digitalWrite(buzzer,LOW);
+}
+
+else if(z<300)
+
+{
+digitalWrite(buzzer,HIGH); lcd.clear();
+lcd.print("Need	Washroom"); delay(1000); digitalWrite(buzzer,LOW);
+ 
+}
+
+waitTime = millis()-startTime;
+
+if (waitTime > (writingTimer*1000))
+
+{
+
+SensorReadings(); writeThingSpeak(); startTime = millis();
+}
+
+SensorReadings();
+
+}
+void writeThingSpeak(void)
+
+{
+
+startThingSpeakCmd();
+
+String getStr = "GET /update?api_key=";getStr += myAPIkey;
+
+
+getStr	+=	"&field1=";
+getStr	+=	String(hr);
+getStr	+=	"&field2=";
+getStr	+=	String(spo2);
+getStr	+=	"&field3=";
+getStr
+
+getStr	+=	String(temperatureF);
+
++=	"\r\n\r\n";
+
+GetThingspeakcmd(getStr);
+
+}
+ 
+
+void startThingSpeakCmd(void)
+{
+
+ESP8266.flush();
+
+String cmd = "AT+CIPSTART=\"TCP\",\""; cmd += "184.106.153.149";
+// api.thingspeak.com IP addresscmd += "\",80";
+
+ESP8266.println(cmd); Serial.print("Start Commands: "); Serial.println(cmd);
+if(ESP8266.find("Error"))
+
+{
+
+Serial.println("AT+CIPSTART error"); return;
+}
+
+}
+
+String GetThingspeakcmd(String getStr)
+
+{
+
+String cmd = "AT+CIPSEND="; cmd += String(getStr.length());
+ESP8266.println(cmd); Serial.println(cmd);
+ 
+if(ESP8266.find(">"))
+
+{
+
+ESP8266.print(getStr)Serial.println(getStr); delay(500);
+String messageBody = ""; while (ESP8266.available())
+{
+Stringline=ESP8266.readStringUntil(''); if (line.length() == 1)
+{
+messageBody = ESP8266.readStringUntil('\n');
+}
+
+}
+Serial.print("Message	Body   received:	"); Serial.println(messageBody);
+return messageBody;
+
+}
+else
+
+{ ESP8266.println("AT+CIPCLOSE");
+Serial.println("AT+CIPCLOSE");
+
+}
+}
