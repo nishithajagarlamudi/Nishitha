@@ -31,10 +31,10 @@ The **Paralysis Patient Health Monitoring System** is an IoT-based solution desi
 4. **Alert System & Emergency Response** – If critical thresholds are crossed, caregivers receive instant alerts.
 
 ## **Benefits**
-✅ Continuous 24/7 health monitoring
-✅ Early detection of critical conditions
-✅ Remote monitoring for caregivers
-✅ Data-driven decision-making for doctors
-✅ Improved patient care and safety
+- Continuous 24/7 health monitoring
+- Early detection of critical conditions
+- Remote monitoring for caregivers
+- Data-driven decision-making for doctors
+- Improved patient care and safety
 
 
