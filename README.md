@@ -4,7 +4,7 @@
 The **Paralysis Patient Health Monitoring System** is an IoT-based solution designed to track and monitor vital health parameters of paralysis patients in real time. It provides caregivers and healthcare professionals with instant alerts, ensuring timely medical intervention and improved patient care.
 
 ## **Features**
- **Real-Time Vital Sign Monitoring** (Heart rate, body temperature, muscle activity, etc.)
+ **Real-Time Vital Sign Monitoring** (Heart rate, body temperature, muscle activity, etc.)<b/>
  **IoT-Based Data Transmission** (Wi-Fi, Bluetooth, or MQTT protocols)
  **Instant Alerts & Notifications** (SMS, Email, or App-based alerts)
  **Data Storage & Analysis** (Health records for future reference)
