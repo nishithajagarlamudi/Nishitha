@@ -5,7 +5,7 @@ The **Paralysis Patient Health Monitoring System** is an IoT-based solution desi
 
 ## **Features**
  **Real-Time Vital Sign Monitoring** (Heart rate, body temperature, muscle activity, etc.)
-**IoT-Based Data Transmission** (Wi-Fi, Bluetooth, or MQTT protocols)
+ **IoT-Based Data Transmission** (Wi-Fi, Bluetooth, or MQTT protocols)
  **Instant Alerts & Notifications** (SMS, Email, or App-based alerts)
  **Data Storage & Analysis** (Health records for future reference)
  **User-Friendly Dashboard** (Web or Mobile-based visualization)
