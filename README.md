@@ -21,7 +21,6 @@ The **Paralysis Patient Health Monitoring System** is an IoT-based solution desi
 ### **Software & Tools**
 - **Programming Languages**: Python
 - **Frameworks**: Flask/Django (for web dashboard), Node.js (IoT integration)
-- **Database**: Firebase, MySQL, or PostgreSQL
 - **Communication Protocols**: MQTT, HTTP, Bluetooth, Wi-Fi
 
 ## **How It Works**
