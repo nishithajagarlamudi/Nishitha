@@ -4,25 +4,25 @@
 The **Paralysis Patient Health Monitoring System** is an IoT-based solution designed to track and monitor vital health parameters of paralysis patients in real time. It provides caregivers and healthcare professionals with instant alerts, ensuring timely medical intervention and improved patient care.
 
 ## **Features**
- **Real-Time Vital Sign Monitoring** (Heart rate, body temperature, muscle activity, etc.)<b/>
- **IoT-Based Data Transmission** (Wi-Fi, Bluetooth, or MQTT protocols)
- **Instant Alerts & Notifications** (SMS, Email, or App-based alerts)
- **Data Storage & Analysis** (Health records for future reference)
- **User-Friendly Dashboard** (Web or Mobile-based visualization)<b/>
- **Emergency Response Integration** (Triggers emergency call if needed)
+ 1.**Real-Time Vital Sign Monitoring** (Heart rate, body temperature, muscle activity, etc.)<b/>
+ 2.**IoT-Based Data Transmission** (Wi-Fi, Bluetooth, or MQTT protocols)
+ 3.**Instant Alerts & Notifications** (SMS, Email, or App-based alerts)
+ 4.**Data Storage & Analysis** (Health records for future reference)
+ 5.**User-Friendly Dashboard** (Web or Mobile-based visualization)<b/>
+ 6.**Emergency Response Integration** (Triggers emergency call if needed)
 
 ## **Technologies Used**
 ### **Hardware Components**
- **Pulse Sensor** – Monitors heart rate
- **Temperature Sensor (DS18B20, LM35, etc.)** – Tracks body temperature
- **EMG Sensor** – Detects muscle activity
- **Microcontroller (ESP32, Arduino, Raspberry Pi)** – Processes sensor data
+ 1.**Pulse Sensor** – Monitors heart rate
+ 2.**Temperature Sensor (DS18B20, LM35, etc.)** – Tracks body temperature
+ 3.**EMG Sensor** – Detects muscle activity
+ 4.**Microcontroller (ESP32, Arduino, Raspberry Pi)** – Processes sensor data
 
 ### **Software & Tools**
- **Programming Languages**: Python, C++
- **Frameworks**: Flask/Django (for web dashboard), Node.js (IoT integration)
-**Database**: Firebase, MySQL, or PostgreSQL
-**Communication Protocols**: MQTT, HTTP, Bluetooth, Wi-Fi
+1.**Programming Languages**: Python, C++
+2.**Frameworks**: Flask/Django (for web dashboard), Node.js (IoT integration)
+3.**Database**: Firebase, MySQL, or PostgreSQL
+4.**Communication Protocols**: MQTT, HTTP, Bluetooth, Wi-Fi
 
 #
 ## **How It Works**
@@ -32,11 +32,11 @@ The **Paralysis Patient Health Monitoring System** is an IoT-based solution desi
 4. **Alert System & Emergency Response** – If critical thresholds are crossed, caregivers receive instant alerts.
 
 ## **Benefits**
-Continuous 24/7 health monitoring
-Early detection of critical conditions
-Remote monitoring for caregivers
-Data-driven decision-making for doctors
-Improved patient care and safety
+1.Continuous 24/7 health monitoring
+2.Early detection of critical conditions
+3.Remote monitoring for caregivers
+4.Data-driven decision-making for doctors
+5.Improved patient care and safety
 
 
 
